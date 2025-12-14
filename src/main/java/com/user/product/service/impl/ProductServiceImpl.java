@@ -5,11 +5,11 @@ import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpServerErrorException.InternalServerError;
 
 import com.user.product.dto.ProductRequest;
 import com.user.product.dto.ProductResponse;
 import com.user.product.entity.ProductEntity;
+import com.user.product.exception.ProductNotFoundException;
 import com.user.product.repository.ProductRepository;
 import com.user.product.service.ProductService;
 
@@ -63,8 +63,17 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public ProductResponse updateProduct(Long id, ProductRequest request) {
-		// TODO Auto-generated method stub
-		return null;
+		//1. check if product available on id or else throw product not available on id
+		 	ProductEntity entity = repository.findById(id).orElseThrow(()->new ProductNotFoundException(id));
+			
+		//2. if record found the convert request data into entity
+		 	mapper.map(request, entity);
+		 
+		//3.save the entity object
+		 	ProductEntity updatedObject = repository.save(entity);
+		 	
+		//4. map updated object and return the object
+		 	return mapper.map(updatedObject, ProductResponse.class);
 	}
 
 	@Override

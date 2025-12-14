@@ -6,9 +6,13 @@ package com.user.product.exception;
  * @created on 14 Dec 2025
  * @version 1.0
  */
-public class ProductException extends RuntimeException {
+public class ProductNotFoundException extends RuntimeException {
 
 	
 	private static final long serialVersionUID = 1L;
+	
+	 public ProductNotFoundException(Long id) {
+	        super("Product not found with id: " + id);
+	    }
 
 }
