@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import lombok.Data;
 
 /**
- * Description: this class is responsible for TODO
+ * Description: this class is responsible for capture request data
  * vikas
  * @created on 14 Dec 2025
  * @version 1.0
