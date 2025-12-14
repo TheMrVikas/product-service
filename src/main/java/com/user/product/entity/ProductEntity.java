@@ -26,7 +26,7 @@ import lombok.ToString;
 @ToString
 @Entity
 @Table(name = "products")
-public class Product extends AuditableEntity implements Serializable {
+public class ProductEntity extends AuditableEntity implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	

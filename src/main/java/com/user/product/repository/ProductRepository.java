@@ -3,7 +3,8 @@ package com.user.product.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.user.product.entity.Product;
+import com.user.product.entity.ProductEntity;
+
 
 /**
  * Description: this class is responsible for TODO
@@ -12,6 +13,7 @@ import com.user.product.entity.Product;
  * @version 1.0
  */
 @Repository
-public interface ProductRepository extends JpaRepository<Product, Long> {
+public interface ProductRepository extends JpaRepository<ProductEntity, Long> {
 
+	
 }

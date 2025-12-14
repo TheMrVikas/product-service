@@ -1,13 +1,15 @@
 package com.user.product.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpServerErrorException.InternalServerError;
 
 import com.user.product.dto.ProductRequest;
 import com.user.product.dto.ProductResponse;
-import com.user.product.entity.Product;
+import com.user.product.entity.ProductEntity;
 import com.user.product.repository.ProductRepository;
 import com.user.product.service.ProductService;
 
@@ -29,10 +31,10 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public ProductResponse createProduct(ProductRequest request) {
 		//1. convert request to entity data
-		Product productEntity = mapper.map(request,Product.class);
+		ProductEntity productEntity = mapper.map(request,ProductEntity.class);
 		
 		//2. persist entity to database
-		Product productEntityReponse = repository.save(productEntity);
+		ProductEntity productEntityReponse = repository.save(productEntity);
 		
 		//3.convert entity response to dto response
 		return mapper.map(productEntityReponse,ProductResponse.class);
@@ -40,8 +42,8 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public ProductResponse getProductById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		ProductEntity productEntity = repository.findById(id).orElseThrow();  //here need to through custum exception
+		return mapper.map(productEntity, ProductResponse.class);
 	}
 
 	@Override
@@ -55,7 +57,7 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public List<ProductResponse> getByCategory(String category) {
-		// TODO Auto-generated method stub
+		//repository.find
 		return null;
 	}
 
@@ -67,8 +69,7 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public void deleteProduct(Long id) {
-		// TODO Auto-generated method stub
-		
+		repository.deleteById(id);
 	}
 
 }
