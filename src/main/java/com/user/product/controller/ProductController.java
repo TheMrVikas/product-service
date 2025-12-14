@@ -18,6 +18,7 @@ import com.user.product.dto.ProductRequest;
 import com.user.product.dto.ProductResponse;
 import com.user.product.service.ProductService;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 /**
@@ -39,7 +40,7 @@ public class ProductController {
 	}
 
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ProductResponse> create(@RequestBody ProductRequest request) {
+	public ResponseEntity<ProductResponse> create(@Valid @RequestBody ProductRequest request) {
 		ProductResponse product = service.createProduct(request);
 		return Objects.nonNull(product) ? ResponseEntity.ok(product) : ResponseEntity.internalServerError().build();
 	}
