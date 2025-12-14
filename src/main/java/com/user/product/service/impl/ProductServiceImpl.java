@@ -42,7 +42,7 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public ProductResponse getProductById(Long id) {
-		ProductEntity productEntity = repository.findById(id).orElseThrow();  //here need to through custum exception
+		ProductEntity productEntity = repository.findById(id).orElseThrow(()->new ProductNotFoundException(id));  //here need to through custum exception
 		return mapper.map(productEntity, ProductResponse.class);
 	}
 
