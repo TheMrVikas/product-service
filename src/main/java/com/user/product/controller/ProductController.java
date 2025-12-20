@@ -103,4 +103,10 @@ public class ProductController {
          ProductResponse updateProduct = service.updateProduct(id, request);
          return Objects.nonNull(updateProduct) ? ResponseEntity.ok(updateProduct) : ResponseEntity.internalServerError().build();
     }
+	
+	@GetMapping(value = { "/{keyword}" })
+	public ResponseEntity<List<ProductResponse>> search(@PathVariable("keyword") String keyword) {
+		List<ProductResponse> searchProduct = service.searchProduct(keyword);
+		return Objects.nonNull(searchProduct)?ResponseEntity.ok(searchProduct):ResponseEntity.noContent().build();
+	}
 }

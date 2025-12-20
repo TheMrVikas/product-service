@@ -67,4 +67,12 @@ public interface ProductService {
 	  * void
 	  */
 	 void deleteProduct(Long id);
+	 
+	 /**
+	  * this method is responsible to search the product based on keyword
+	  * @param id
+	  * TODO
+	  * void
+	  */
+	 public List<ProductResponse> searchProduct(String keyword);
 }

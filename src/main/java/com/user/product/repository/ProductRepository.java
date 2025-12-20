@@ -18,4 +18,6 @@ import com.user.product.entity.ProductEntity;
 public interface ProductRepository extends JpaRepository<ProductEntity, Long> {
 
 	List<ProductEntity> findByCategory(String category);
+	
+	List<ProductEntity> findByNameContainingIgnoreCaseOrCategoryContainingIgnoreCase(String name,String catrgory);
 }

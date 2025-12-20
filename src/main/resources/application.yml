@@ -20,17 +20,24 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
-    properties:
+    properties: 
       hibernate:
         format_sql: true
+  defer-datasource-initialization: true
+
   
+#query executed and data will insert at the time of server startup
+  sql:
+    init:
+      mode: always
+
+# apna application package
+#com.vikas: INFO
+
 #logging:
  # level:
  #   root: info       # sab band
  #   org.springframework: off
   #  org.hibernate: off
    # org.apache.tomcat: off
-
-# apna application package
-#com.vikas: INFO
 

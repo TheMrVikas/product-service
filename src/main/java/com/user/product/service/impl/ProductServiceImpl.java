@@ -1,7 +1,6 @@
 package com.user.product.service.impl;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -79,6 +78,14 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public void deleteProduct(Long id) {
 		repository.deleteById(id);
+	}
+
+	@Override
+	public List<ProductResponse> searchProduct(String keyword) {
+		return repository
+		.findByNameContainingIgnoreCaseOrCategoryContainingIgnoreCase(keyword, keyword)
+		.stream()
+		.map(eachProduct->mapper.map(eachProduct, ProductResponse.class)).toList();
 	}
 
 }
