@@ -2,6 +2,8 @@ package com.user.product.entity.base;
 
 import java.time.LocalDateTime;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -31,10 +33,12 @@ public abstract class AuditableEntity {
 	
 	@CreatedDate
     @Column(name = "CREATED_DATE", updatable = false)
+	@CreationTimestamp
     private LocalDateTime createdDate;
 
     @LastModifiedDate
-    @Column(name = "UPDATED_DATE")
+    @Column(name = "UPDATED_DATE",insertable = false)
+    @UpdateTimestamp
     private LocalDateTime updatedDate;
 
     @CreatedBy
@@ -42,6 +46,6 @@ public abstract class AuditableEntity {
     private String createdBy;
 
     @LastModifiedBy
-    @Column(name = "UPDATED_BY")
+    @Column(name = "UPDATED_BY",insertable = false)
     private String updatedBy;
 }
